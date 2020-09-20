@@ -266,7 +266,8 @@ namespace Microsoft.Oryx.BuildScriptGenerator.DotNetCore
             string runtimeVersion,
             Dictionary<string, string> versionMap)
         {
-            if (context.SourceRepo.FileExists(DotNetCoreConstants.GlobalJsonFileName))
+            if (_commonOptions.EnableDynamicInstall
+                && context.SourceRepo.FileExists(DotNetCoreConstants.GlobalJsonFileName))
             {
                 var availableSdks = versionMap.Values;
                 var globalJsonSdkVersion = _globalJsonSdkResolver.GetSatisfyingSdkVersion(
